@@ -24,7 +24,7 @@
     "size": 6
   },
   "1": {
-    "type": "colreset"
+    "type": "colReset"
   },
   "2": {
     "type": "input",
@@ -49,5 +49,39 @@
       "position": "top"
     },
     "size": 6
+  },
+  "3": {
+    "type": "checkbox",
+    "title": {
+      "en": "Check check check",
+      "nl": "Sjek sjek sjeck"
+    },
+    "value": null,
+    "required": true,
+    "db_field": "checkbox",
+    "description": {
+      "value": {
+        "en": "This is a checkbox",
+        "nl": "Dit is een checkdoos"
+      },
+      "type": "title",
+      "position": "top"
+    },
+    "size": 12
+  },
+  "999": {
+    "type": "buttonSubmit",
+    "title": {
+      "en": "Submit",
+      "nl": "Verzenden"
+    },
+    "description": {
+      "value": {
+        "en": "This is a checkbox",
+        "nl": "Dit is een checkdoos"
+      },
+      "type": "title",
+      "position": "top"
+    }
   }
 }

@@ -21,18 +21,24 @@ class FormCreator {
     private $styles = [
         'form-group' => 'form-group',
         'form-control' => 'form-control',
+        'form-check' => 'form-check',
+        'form-check-input' => 'form-check-input',
+        'form-check-label' => 'form-check-label',
         'col' => 'col',
+        'button-classes' => 'btn btn-primary mt-3',
     ];
 
-    private $container = '<div class="row">{FORM}<div class="col-12"><button type="submit" class="btn btn-primary">Verzenden</button></div></div>';
+    private $container = '{FORM}';
 
     /**
      * Create formCreator object
      * 
      * @param object $data - Form data
      */
-    public function __construct($data){
+    public function __construct($data, $language = 'en'){
         $this->formData = $data;
+        $this->language = $language;
+        $this->container = '<div class="row">{FORM}</div>';
     }
 
     /**
@@ -60,8 +66,12 @@ class FormCreator {
                     $this->formHTML .= $this->getRadioType($item); // TODO
                     break;
 
-                case 'colreset':
-                    $this->formHTML .= $this->getColResetType($item);
+                case 'colReset':
+                    $this->formHTML .= $this->getColResetType();
+                    break;
+
+                case 'buttonSubmit':
+                    $this->formHTML .= $this->getButtonSubmit($item);
                     break;
                 
                 default:
@@ -77,6 +87,10 @@ class FormCreator {
     }
 
     /**
+     * COMPONENTS
+     */
+
+    /**
      * Component Input
      * 
      * @param object $item - Input item
@@ -87,16 +101,41 @@ class FormCreator {
 
         $return = '
         <div class="'.$this->styles['form-group'].' '.$this->styles['col'].'-'.$item->size.'">
-            <label for="'.$id.'">'.$item->title->{$this->language}.'</label>
+            <label 
+                for="'.$id.'"
+                title="'.($item->description->type === 'title' ? $item->description->value->{$this->language} : null) .'">'.$item->title->{$this->language}.'</label>
             <input
                 id="'.$id.'"
                 name="'.$item->db_field.'"
                 type="'.$item->subtype.'"
                 placeholder="'.$item->placeholder->{$this->language}.'"
-                title="'.($item->description->type === 'title' ? $item->description->value->{$this->language} : null) .'"
-                value=""
+                value="'.$item->value.'"
                 class="'.$this->styles['form-control'].'"
-                '.($item->required ? 'required' : null) .'/>
+                '.($item->required ? 'required' : null) .'>
+        </div>
+        ';
+
+        return trim(preg_replace('/\s\s+/', ' ', $return));
+
+    }
+
+    protected function getCheckboxType($item){
+
+        $id = "input-".mt_rand(1000,9999).'-'.$item->db_field;
+
+        $return = '
+        <div class="'.$this->styles['form-check'].' '.$this->styles['col'].'-'.$item->size.'">
+            <input 
+                type="checkbox" 
+                name="'.$item->db_field.'" 
+                class="'.$this->styles['form-check-input'].'" 
+                id="'.$id.'" 
+                '.($item->value ? 'checked' : null) .'
+                '.($item->required ? 'required' : null) .'>
+            <label 
+                class="'.$this->styles['form-check-label'].'"
+                for="'.$id.'"
+                title="'.($item->description->type === 'title' ? $item->description->value->{$this->language} : null) .'">'.$item->title->{$this->language}.'</label>
         </div>
         ';
 
@@ -107,9 +146,18 @@ class FormCreator {
     /**
      * Component reset collum
      */
-    protected function getColResetType($item){
+    protected function getColResetType(){
 
         return '<div class="col-12"></div>';
+
+    }
+
+    /**
+     * Component submit button
+     */
+    protected function getButtonSubmit($item){
+
+        return '<div class="col-12"><button type="submit" class="'.$this->styles['button-classes'].'">'.$item->title->{$this->language}.'</button></div>';
 
     }
 
