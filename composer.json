@@ -1,5 +1,5 @@
 {
-  "name": "robin-mglsk/php-form-creator",
+  "name": "robinmglsk/php-form-creator",
   "autoload": {
     "psr-0": {
       "RobinMglsk\\PHPFormCreator": "src"
