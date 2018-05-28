@@ -7,5 +7,5 @@ Author Robin Migalski (@RobinMglsk) robin@mglsk.be
 ### How to install
 
 ```
-composer require RobinMglsk/PHPFormCreator
+composer require robinmglsk/php-form-creator
 ```
