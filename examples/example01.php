@@ -1,6 +1,6 @@
 <?php
 
-use robinMglsk\FormCreator;
+use RobinMglsk\PHPFormCreator\FormCreator;
 
 require('../src/FormCreator.php');
 
