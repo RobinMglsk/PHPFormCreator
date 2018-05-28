@@ -1,0 +1,53 @@
+{
+  "0": {
+    "type": "input",
+    "subtype": "text",
+    "title": {
+      "en": "First name",
+      "nl": "Voornaam"
+    },
+    "placeholder": {
+      "en": "First name placeholder",
+      "nl": "Voornaam placeholder"
+    },
+    "value": null,
+    "required": true,
+    "db_field": "first_name",
+    "description": {
+      "value": {
+        "en": "First name description",
+        "nl": "Voornaam description"
+      },
+      "type": "title",
+      "position": "top"
+    },
+    "size": 6
+  },
+  "1": {
+    "type": "colreset"
+  },
+  "2": {
+    "type": "input",
+    "subtype": "text",
+    "title": {
+      "en": "Last name",
+      "nl": "Naam"
+    },
+    "placeholder": {
+      "en": "First name placeholder",
+      "nl": "Voornaam placeholder"
+    },
+    "value": null,
+    "required": true,
+    "db_field": "first_name",
+    "description": {
+      "value": {
+        "en": "First name description",
+        "nl": "Voornaam description"
+      },
+      "type": "title",
+      "position": "top"
+    },
+    "size": 6
+  }
+}

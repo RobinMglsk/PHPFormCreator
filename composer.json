@@ -1,0 +1,8 @@
+{
+  "name": "RobinMglsk/PHPFormCreator",
+  "autoload": {
+    "psr-0": {
+      "RobinMglsk\\PHPFormCreator": "src"
+    }
+  }
+}
