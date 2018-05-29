@@ -36,7 +36,7 @@
     },
     "value": null,
     "required": true,
-    "db_field": "first_name",
+    "db_field": "last_name",
     "description": {
       "value": {
         "en": "Last name description",
@@ -87,7 +87,7 @@
     },
     "value": null,
     "required": true,
-    "db_field": "checkbox",
+    "db_field": "checbox",
     "description": {
       "value": {
         "en": "This is a checkbox",
@@ -106,7 +106,7 @@
     },
     "value": null,
     "required": true,
-    "db_field": "select",
+    "db_field": "bbfood",
     "description": {
       "value": {
         "en": "This is a radio group",
