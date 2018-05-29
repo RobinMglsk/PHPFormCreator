@@ -51,35 +51,35 @@ class FormCreator {
             switch ($item->type) {
 
                 case 'input':
-                    $this->formHTML .= $this->getInputType($item);
+                    $this->formHTML .= $this->getInputHTML($item);
                     break;
 
                 case 'checkbox':
-                    $this->formHTML .= $this->getCheckboxType($item);
+                    $this->formHTML .= $this->getCheckboxHTML($item);
                     break;
 
                 case 'select':
-                    $this->formHTML .= $this->getSelectType($item);
+                    $this->formHTML .= $this->getSelectHTML($item);
                     break;
 
                 case 'radio':
-                    $this->formHTML .= $this->getRadioType($item);
+                    $this->formHTML .= $this->getRadioHTML($item);
                     break;
 
                 case 'colReset':
-                    $this->formHTML .= $this->getColResetType();
+                    $this->formHTML .= $this->getColResetHTML();
                     break;
 
                 case 'text':
-                    $this->formHTML .= $this->getTextType($item);
+                    $this->formHTML .= $this->getTextHTML($item);
                     break;
 
                 case 'buttonSubmit':
-                    $this->formHTML .= $this->getButtonSubmit($item);
+                    $this->formHTML .= $this->getButtonSubmitHTML($item);
                     break;
                 
                 default:
-                    $this->formHTML .= $this->getInputType($item);
+                    $this->formHTML .= $this->getInputHTML($item);
                     break;
             }
 
@@ -90,16 +90,62 @@ class FormCreator {
 
     }
 
+     /**
+     * Render database field
+     * 
+     * @return array database field
+     */
+    public function getFormDBFields(){
+
+        $fields = [];
+
+        foreach($this->formData as $key => $item){
+            
+            switch ($item->type) {
+
+                case 'input':
+                    $return = $this->getInputDB($item);
+                    break;
+
+                case 'checkbox':
+                    $return = $this->getCheckboxDB($item);
+                    break;
+
+                case 'select':
+                    $return = $this->getSelectDB($item);
+                    break;
+
+                case 'radio':
+                    $return = $this->getRadioDB($item);
+                    break;
+                
+                default:
+                    $return = false;
+                    break;
+            }
+
+            if($return !== false){
+                array_push($fields, $return);
+            }
+
+
+        }
+
+        return $fields;
+
+    }
+
     /**
      * COMPONENTS
      */
 
+
     /**
-     * Component - Input
+     * Component HTML - Input
      * 
      * @param object $item - Input item
      */
-    protected function getInputType($item){
+    protected function getInputHTML($item){
 
         $id = "input-".mt_rand(1000,9999).'-'.$item->db_field;
 
@@ -127,9 +173,57 @@ class FormCreator {
     }
 
     /**
-     * Component - Checkbox
+     * Component DBField - Input
+     * 
+     * @param object $item - Input item
+     * @return object column data
      */
-    protected function getCheckboxType($item){
+    protected function getInputDB($item){
+
+        switch($item->subtype){
+            case 'text':
+            case 'email':
+            case 'tel':
+            case 'password':
+            case 'color':
+            case 'search':
+            case 'url':
+                $type = 'TINYTEXT';
+                break;
+
+            case 'date':
+            case 'datetime-local':
+            case 'week':
+            case 'month':
+            case 'time':
+                $type = 'TIMESTAMP';
+                break;
+
+            case 'number':
+            case 'range':
+                $type = 'INT';
+                break;
+
+            default:
+                $type = 'TINYTEXT';
+                break;
+        }
+
+        return [
+            'name' => $item->db_field,
+            'type' => $type,
+            'nullable' => true
+        ];
+
+    }
+
+    /**
+     * Component HTML - Checkbox
+     * 
+     * @param object $item - Input item
+     * @return string HTML
+     */
+    protected function getCheckboxHTML($item){
 
         $id = "input-".mt_rand(1000,9999).'-'.$item->db_field;
 
@@ -159,11 +253,29 @@ class FormCreator {
     }
 
     /**
-     * Component - Radio
+     * Component DBField - Checkbox
      * 
-     * A group of radio buttons
+     * @param object $item - Input item
+     * @return object column data
      */
-    protected function getRadioType($item){
+    protected function getCheckboxDB($item){
+
+        return [
+            'name' => $item->db_field,
+            'type' => 'TINYINT(1)',
+            'default' => 0
+        ];
+
+    }
+
+    /**
+     * Component HTML - Radio
+     * A group of radio buttons
+     * 
+     * @param object $item - Input item
+     * @return string HTML
+     */
+    protected function getRadioHTML($item){
 
         $id = "input-".mt_rand(1000,9999).'-'.$item->db_field;
 
@@ -212,9 +324,28 @@ class FormCreator {
     }
 
     /**
-     * Component - Select
+     * Component DBField - Radio
+     * 
+     * @param object $item - Input item
+     * @return object column data
      */
-    protected function getSelectType($item){
+    protected function getRadioDB($item){
+
+        return [
+            'name' => $item->db_field,
+            'type' => 'TINYTEXT',
+            'nullable' => true
+        ];
+
+    }
+
+    /**
+     * Component HTML - Select
+     * 
+     * @param object $item - Input item
+     * @return string HTML
+     */
+    protected function getSelectHTML($item){
 
         $id = "text-".mt_rand(1000,9999).'-'.$item->db_field;
 
@@ -255,18 +386,39 @@ class FormCreator {
     }
 
     /**
-     * Component - Reset collum
+     * Component DBField - Select
+     * 
+     * @param object $item - Input item
+     * @return object column data
      */
-    protected function getColResetType(){
+    protected function getSelectDB($item){
+
+        return [
+            'name' => $item->db_field,
+            'type' => 'TINYTEXT',
+            'nullable' => true
+        ];
+
+    }
+
+    /**
+     * Component HTML - Reset collum
+     * 
+     * @return string HTML
+     */
+    protected function getColResetHTML(){
 
         return '<div class="col-12"></div>';
 
     }
 
     /**
-     * Component - Text
+     * Component HTML - Text
+     * 
+     * @param object $item - Input item
+     * @return string HTML
      */
-    protected function getTextType($item){
+    protected function getTextHTML($item){
 
         $id = "text-".mt_rand(1000,9999);
         $allowed = '<p><span><a><b><i><ul><ol><li><h1><h2><h3><h4><h5><h6><strong><italic><code><pre><mark><em><small><del><ins><sub><sup><q><blockquote><abbr><address><cite><bdo><br>';
@@ -281,9 +433,12 @@ class FormCreator {
     }
 
     /**
-     * Component - Submit button
+     * Component HTML - Submit button
+     * 
+     * @param object $item - Input item
+     * @return string HTML
      */
-    protected function getButtonSubmit($item){
+    protected function getButtonSubmitHTML($item){
 
         return '<div class="col-12"><button type="submit" class="'.$this->styles['button-classes'].'">'.$item->title->{$this->language}.'</button></div>';
 
