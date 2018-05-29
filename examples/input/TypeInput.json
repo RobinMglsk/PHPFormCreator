@@ -77,8 +77,8 @@
     },
     "description": {
       "value": {
-        "en": "This is a checkbox",
-        "nl": "Dit is een checkdoos"
+        "en": "Click to submit",
+        "nl": "Klik hier om te verzenden"
       },
       "type": "title",
       "position": "top"
