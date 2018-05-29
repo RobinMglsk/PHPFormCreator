@@ -4,12 +4,14 @@ use RobinMglsk\PHPFormCreator\FormCreator;
 
 require('../src/FormCreator.php');
 
+// Get language from get request
+$language = (isset($_GET['language']) && in_array($_GET['language'],['en','nl'])) ? $_GET['language'] : 'en';
+   
 // Load formObject from json file
 $string = file_get_contents('./input/TypeInput.json');
 $formObject = json_decode($string);
 
-$fc = new FormCreator($formObject);
-
+$fc = new FormCreator($formObject, $language);
 
 
 ?>

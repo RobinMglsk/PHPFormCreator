@@ -24,9 +24,6 @@
     "size": 6
   },
   "1": {
-    "type": "colReset"
-  },
-  "2": {
     "type": "input",
     "subtype": "text",
     "title": {
@@ -34,23 +31,55 @@
       "nl": "Naam"
     },
     "placeholder": {
-      "en": "First name placeholder",
-      "nl": "Voornaam placeholder"
+      "en": "Last name placeholder",
+      "nl": "Achternaam placeholder"
     },
     "value": null,
     "required": true,
     "db_field": "first_name",
     "description": {
       "value": {
-        "en": "First name description",
-        "nl": "Voornaam description"
+        "en": "Last name description",
+        "nl": "Achternaam description"
       },
       "type": "title",
       "position": "top"
     },
     "size": 6
   },
+  "2": {
+    "type": "colReset"
+  },
   "3": {
+    "type": "select",
+    "title": {
+      "en": "Select",
+      "nl": "Kies"
+    },
+    "value": null,
+    "required": true,
+    "db_field": "select",
+    "description": {
+      "value": {
+        "en": "This is a checkbox",
+        "nl": "Dit is een checkdoos"
+      },
+      "type": "title",
+      "position": "top"
+    },
+    "options": {
+      "dog": {
+        "en": "Dog",
+        "nl": "Hond"
+      },
+      "cat": {
+        "en": "Cat",
+        "nl": "Kat"
+      }
+    },
+    "size": 12
+  },
+  "4": {
     "type": "checkbox",
     "title": {
       "en": "Check check check",
@@ -68,6 +97,45 @@
       "position": "top"
     },
     "size": 12
+  },
+  "5": {
+    "type": "radio",
+    "title": {
+      "en": "Baby likes...",
+      "nl": "Baby eet graag..."
+    },
+    "value": null,
+    "required": true,
+    "db_field": "select",
+    "description": {
+      "value": {
+        "en": "This is a radio group",
+        "nl": "Dit is een radio input groep"
+      },
+      "type": "title",
+      "position": "top"
+    },
+    "options": {
+      "milk": {
+        "en": "Milk",
+        "nl": "Melk"
+      },
+      "bread": {
+        "en": "Bread",
+        "nl": "Brood"
+      },
+      "vege_porridge": {
+        "en": "Vegetable porridge",
+        "nl": "Groentepap"
+      },
+      "fruit": "Fruit"
+    },
+    "size": 12
+  },
+  "900": {
+    "type": "text",
+    "size": 12,
+    "value": "<small>Test text <a href=\"#\">with a link!</a></small>"
   },
   "999": {
     "type": "buttonSubmit",
