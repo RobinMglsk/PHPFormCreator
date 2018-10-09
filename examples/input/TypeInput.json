@@ -151,5 +151,20 @@
       "type": "title",
       "position": "top"
     }
+  },
+  "998": {
+    "type": "buttonReset",
+    "title": {
+      "en": "Reset",
+      "nl": "Leegmaken"
+    },
+    "description": {
+      "value": {
+        "en": "Click to reset",
+        "nl": "Klik hier om het formulier te legen"
+      },
+      "type": "title",
+      "position": "top"
+    }
   }
 }
