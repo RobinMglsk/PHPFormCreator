@@ -77,6 +77,10 @@ class FormCreator {
                 case 'buttonSubmit':
                     $this->formHTML .= $this->getButtonSubmitHTML($item);
                     break;
+
+                case 'buttonReset':
+                    $this->formHTML .= $this->getButtonResetHTML($item);
+                    break;
                 
                 default:
                     $this->formHTML .= $this->getInputHTML($item);
@@ -441,6 +445,18 @@ class FormCreator {
     protected function getButtonSubmitHTML($item){
 
         return '<div class="col-12"><button type="submit" class="'.$this->styles['button-classes'].'">'.$item->title->{$this->language}.'</button></div>';
+
+    }
+
+    /**
+     * Component HTML - Reset button
+     * 
+     * @param object $item - Input item
+     * @return string HTML
+     */
+    protected function getResetSubmitHTML($item){
+
+        return '<div class="col-12"><button type="reset" class="'.$this->styles['button-classes'].'">'.$item->title->{$this->language}.'</button></div>';
 
     }
 
