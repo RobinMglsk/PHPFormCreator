@@ -50,6 +50,7 @@ class FormCreator {
             
             switch ($item->type) {
 
+                //Inputs
                 case 'input':
                     $this->formHTML .= $this->getInputHTML($item);
                     break;
@@ -66,6 +67,11 @@ class FormCreator {
                     $this->formHTML .= $this->getRadioHTML($item);
                     break;
 
+                case 'slider':
+                    $this->formHTML .= $this->getSliderHTML($item);
+                    break;
+
+                // Helpers
                 case 'colReset':
                     $this->formHTML .= $this->getColResetHTML();
                     break;
@@ -74,6 +80,7 @@ class FormCreator {
                     $this->formHTML .= $this->getTextHTML($item);
                     break;
 
+                // Buttons
                 case 'buttonSubmit':
                     $this->formHTML .= $this->getButtonSubmitHTML($item);
                     break;
@@ -156,6 +163,7 @@ class FormCreator {
         // Defaults
         if(!isset($item->size)) $item->size = 12;
 
+        // HTML
         $return = '
         <div class="'.$this->styles['form-group'].' '.$this->styles['col'].'-'.$item->size.'">
             <label 
@@ -234,6 +242,7 @@ class FormCreator {
         // Defaults
         if(!isset($item->size)) $item->size = 12;
 
+        // HTML
         $return = '
         <div class="'.$this->styles['col'].'-'.$item->size.'">
             <div class="'.$this->styles['form-check'].'">
@@ -316,6 +325,7 @@ class FormCreator {
             $index++;
         }
 
+        // HTML
         $return = '
         <div class="'.$this->styles['col'].'-'.$item->size.' mt-3">
         <label 
@@ -371,6 +381,7 @@ class FormCreator {
 
         }
 
+        // HTML
         $return = '
         <div class="'.$this->styles['form-group'].' '.$this->styles['col'].'-'.$item->size.'">
             <label 
@@ -401,6 +412,49 @@ class FormCreator {
             'name' => $item->db_field,
             'type' => 'TINYTEXT',
             'nullable' => true
+        ];
+
+    }
+
+    /**
+     * Component HTML - Slider
+     * 
+     * @param object $item - Input item
+     * @return string HTML
+     */
+    protected function getSliderHTML($item){
+
+        $id = "slider-".mt_rand(1000,9999).'-'.$item->db_field;
+
+        // Defaults
+        if(!isset($item->size)) $item->size = 12;
+
+        // HTML
+        $return = '
+        <div class="'.$this->styles['form-group'].' '.$this->styles['col'].'-'.$item->size.'">
+            <label 
+                for="'.$id.'"
+                title="'.($item->description->type === 'title' ? $item->description->value->{$this->language} : null) .'">'.$item->title->{$this->language}.'</label>
+                <input type="range" min="'.$item->min.'" max="'.$item->max.'" value="'.$item->value.'" class="'.$this->styles['form-control'].'" id="'.$id.'">
+        </div>
+        ';
+
+        return trim(preg_replace('/\s\s+/', ' ', $return));
+
+    }
+
+    /**
+     * Component DBField - Slider
+     * 
+     * @param object $item - Input item
+     * @return object column data
+     */
+    protected function getSliderDB($item){
+
+        return [
+            'name' => $item->db_field,
+            'type' => 'INT',
+            'nullable' => false
         ];
 
     }
