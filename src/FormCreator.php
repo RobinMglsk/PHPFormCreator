@@ -454,7 +454,7 @@ class FormCreator {
      * @param object $item - Input item
      * @return string HTML
      */
-    protected function getResetSubmitHTML($item){
+    protected function getButtonResetHTML($item){
 
         return '<div class="col-12"><button type="reset" class="'.$this->styles['button-classes'].'">'.$item->title->{$this->language}.'</button></div>';
 
